@@ -1,0 +1,106 @@
+{{!< main }}
+
+	<header id="head" class="secondary"></header>
+
+	<!-- container -->
+	<div class="container">
+		<div class="row">
+			
+			<!-- Article main content -->
+			<article class="col-xs-12 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Edit Profile</h1>
+				</header>
+				
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="thin text-center">Edit User Profile</h3>
+							<hr>
+							<form method="post" action="/posting/{{ posting._id }}" enctype='application/x-www-form-urlencoded'>
+								<input type="hidden" name="_method" value="PUT">
+								<div class="top-margin">
+									<label>Ad Title</label>
+									<input type="text" name="title" class="form-control" value="{{ posting.title }}">
+								</div>
+								<div class="top-margin">
+									<label>Category</label>
+									{{#select posting.category }}
+									<select class="form-control" name="category">
+										<option value="politions">Politions</option>
+										<option value="mobile">mobile</option>
+										<option value="vehicles">Vehicles</option>
+										<option value="animals">Animals</option>
+									</select>
+									{{/select}}
+								</div>
+								<div class="top-margin">
+									<label>Price</label>
+									<input type="text" name="price" class="form-control" value="{{ posting.price }}">
+								</div>
+								<div class="top-margin">
+									<label>Descripton</label>
+									<textarea class="form-control" name="description">
+											{{ posting.description }}
+									</textarea>	
+								</div>
+								<div class="top-margin">
+									<label>Image</label>
+									{{#each posting.images}}
+										<span style="width:33%;"><img src="/{{ this.path }}" /></span>
+									{{/each}}
+									
+									
+								</div>
+								<div class="top-margin">
+									<label>Name</label>
+									<input type="text" name="name" class="form-control" value="{{ posting.name }}">
+								</div>
+								<div class="top-margin">
+									<label>Phone Number</label>
+									<input type="text" name="phone" class="form-control" value="{{ posting.phone }}">
+								</div>
+								<div class="top-margin">
+									<label>State</label>
+									{{#select posting.state }}
+									<select class="form-control" name="state">
+										<option value=''>State</option>
+										<option value="sindh">Sindh</option>
+										<option value="punjan">Punjab</option>
+										<option value="balochistan">Balochistan</option>
+										<option value="kpk">KPK</option>
+									</select>
+									{{/select}}
+								</div>
+								<div class="top-margin">
+									<label>City</label>
+									{{#select posting.city }}
+									<select class="form-control" name="city">
+										<option value=''>City</option>
+										<option value="karachi">karachi</option>
+										<option value="lahore">lahore</option>
+										<option value="peshawar">peshawar</option>
+										<option value="ajk">ajk</option>
+									</select>
+									{{/select}}
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-lg-4">
+										<button class="btn btn-action" type="submit">Update</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+				
+			</article>
+			<!-- /Article -->
+
+		</div>
+	</div>	<!-- /container -->
+	
+
+	

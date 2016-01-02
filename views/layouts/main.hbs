@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{{> head }}
+	{{{block "pageStyles"}}}
+</head>
+
+<body {{#if bodyClass}}class="{{ bodyClass }}"{{/if}}>
+	
+	{{> nav }}
+
+	{{#if errors }}
+		{{#each errors}}
+		<div class="alert alert-danger" role="alert" style="position: absolute; top:108px; margin: auto; left: 0; right: 0; width: 66%; padding: 7px 15px;">
+			{{ this }}	
+		</div>
+		{{/each}}
+	{{/if}}
+
+	{{#if infos }}
+		{{#each infos}}
+			<div class="alert alert-info" role="alert" style="position: absolute; top:108px;margin: auto; left: 0; right: 0; width: 66%; padding: 7px 15px;">
+				{{ this }}	
+			</div>
+		{{/each}}
+	{{/if}}
+
+	{{{ body }}}
+	
+	{{> footer}}
+	
+	{{> scripts}}
+	
+	{{{block "pageScripts"}}}
+	
+</body>
+</html>

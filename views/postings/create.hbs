@@ -1,0 +1,172 @@
+{{!< main }}
+	
+
+{{#contentFor 'pageStyles'}}
+	<link rel="stylesheet" href="/bower_components/dropzone/dist/min/dropzone.min.css">
+	<!--meta name="csrf-token" content="XYZ123"-->
+{{/contentFor}}	
+
+
+	<header id="head" class="secondary"></header>
+	
+	<!-- container -->
+	<div class="container">
+
+		<div class="row">
+			
+			<!-- Article main content -->
+			<article class="col-sm-12 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Post an Advertisment</h1>
+				</header>
+				<br>
+					<form action="/posting/post" method="post" enctype="multipart/form-data" novalidate class="col-sm-8 col-sm-offset-2" >
+
+						<div class="row">
+							<p>
+								<input class="form-control" type="text" placeholder="Ad Title" name="title" value="{{ input.title }}">
+								{{#if error.errors.title.message }}
+									<div class="badge badge-danger"  role="error">
+										{{ error.errors.title.message }}
+									</div>
+								{{/if}}
+							</p>
+							
+							<p>
+								<select class="form-control" name="category">
+									<option value=''>Select a Category</option>
+									<option  value="politions">Politions</option>
+									<option  value="mobile">mobile</option>
+									<option  value="vehicles">Vehicles</option>
+									<option  value="animals">Animals</option>
+								</select>
+								{{#if error.errors.category.message }}
+									<div class="badge badge-danger"  role="error">
+										{{ error.errors.category.message }}
+									</div>
+								{{/if}}
+							</p>
+							<p>
+								<input class="form-control" type="text" placeholder="Price" name="price" value="{{ input.price }}">
+								{{#if error.errors.price.message }}
+									<div class="badge badge-danger"  role="error">
+										{{ error.errors.price.message }}
+									</div>
+								{{/if}}
+							</p>
+							<p>
+								<textarea placeholder="Type your Description..." class="form-control" rows="9" name="description"></textarea>
+								{{#if error.errors.description.message }}
+									<div class="badge badge-danger"  role="error">
+										{{ error.errors.description.message }}
+									</div>
+								{{/if}}
+							</p>
+
+							<p>
+							    <input class="form-control" name="images" type="file" multiple />
+								{{#if error.errors.images.message }}
+									<div class="badge badge-danger"  role="error">
+										{{ error.errors.images.message }}
+									</div>
+								{{/if}}
+							</p>
+							
+							<p>
+								<input class="form-control" type="text" placeholder="Name" name="name" value="{{ input.name }}">
+								{{#if error.errors.name.message }}
+									<div class="badge badge-danger"  role="error">
+										{{ error.errors.name.message }}
+									</div>
+								{{/if}}
+							</p>
+							<p>
+								<input class="form-control" type="number" placeholder="Phone Number" name="phone" value="{{ input.phone }}">
+								{{#if error.errors.phone.message }}
+									<div class="badge badge-danger"  role="error">
+										{{ error.errors.phone.message }}
+									</div>
+								{{/if}}
+							</p>
+							<p>
+								<select class="form-control" name="state">
+									<option value=''>State</option>
+									<option value="sindh">Sindh</option>
+									<option value="punjan">Punjab</option>
+									<option value="balochistan">Balochistan</option>
+									<option value="kpk">KPK</option>
+								</select>
+								{{#if error.errors.state.message }}
+									<div class="badge badge-danger"  role="error">
+										{{ error.errors.state.message }}
+									</div>
+								{{/if}}
+							</p>
+							<p>
+								<select class="form-control" name="city">
+									<option value=''>City</option>
+									<option value="karachi">karachi</option>
+									<option value="lahore">lahore</option>
+									<option value="peshawar">peshawar</option>
+									<option value="ajk">ajk</option>
+								</select>
+								{{#if error.errors.city.message }}
+									<div class="badge badge-danger"  role="error">
+										{{ error.errors.city.message }}
+									</div>
+								{{/if}}
+							</p>
+						</div>
+					
+						<div class="row">
+							<p class="text-center">
+								<input class="btn btn-action" type="submit" value="Post Ad">
+							</p>
+						</div>
+					</form>
+
+			</article>
+			<!-- /Article -->
+		
+
+		</div>
+	</div>	<!-- /container -->
+
+
+
+{{#contentFor 'pageScripts'}}
+		
+	<script src="/bower_components/dropzone/dist/min/dropzone.min.js"></script>
+	<script>
+	Dropzone.options.uploadWidget = {
+  paramName: 'file',
+  maxFilesize: 2, // MB
+  maxFiles: 1,
+  dictDefaultMessage: 'Drag an image here to upload, or click to select one',
+  headers: {
+    'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value,
+  },
+  acceptedFiles: 'image/*',
+  init: function() {
+    this.on('success', function( file, resp ){
+      console.log( file );
+      console.log( resp );
+    });
+    this.on('thumbnail', function(file) {
+      if ( file.width < 640 || file.height < 480 ) {
+        file.rejectDimensions();
+      }
+      else {
+        file.acceptDimensions();
+      }
+    });
+  },
+  accept: function(file, done) {
+    file.acceptDimensions = done;
+    file.rejectDimensions = function() {
+      done('The image must be at least 640 x 480px')
+    };
+  }
+};
+</script>
+{{/contentFor}}

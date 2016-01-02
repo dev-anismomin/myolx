@@ -1,0 +1,53 @@
+{{!< main }}
+	
+
+{{#contentFor 'pageStyles'}}
+	<!--meta name="csrf-token" content="XYZ123"-->
+{{/contentFor}}	
+
+
+	<header id="head" class="secondary"></header>
+	
+	<!-- container -->
+	<div class="container">
+
+		<div class="row">
+			
+			<!-- Article main content -->
+			<article class="col-sm-12 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Post an Advertisment</h1>
+				</header>
+					
+				<br>
+				<!--enctype="multipart/form-data" -->
+					<form action="images" method="post" enctype="multipart/form-data" novalidate class="col-sm-8 col-sm-offset-2" >
+						<div class="row">
+
+							<div id="upload-widget" class="dropzone">
+							  <div class="fallback">
+							    <input class="form-control" name="file" type="file" multiple />
+							  </div>
+							</div>
+					
+						</div>
+					
+						<div class="row">
+							<p class="text-center">
+								<input class="btn btn-action" type="submit" value="Post Ad">
+							</p>
+						</div>
+					</form>
+
+			</article>
+			<!-- /Article -->
+		
+
+		</div>
+	</div>	<!-- /container -->
+
+
+
+{{#contentFor 'pageScripts'}}
+
+{{/contentFor}}

@@ -1,0 +1,124 @@
+{{!< main }}
+
+	<header id="head" class="secondary"></header>
+
+	<!-- container -->
+	<div class="container">
+		<div class="row">
+			
+			<!-- Article main content -->
+			<article class="col-xs-12 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Edit Profile</h1>
+				</header>
+				
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="thin text-center">Edit User Profile</h3>
+							<hr>
+							<form data-remote method="PUT" action="/admin/users/{{ user._id }}" {{!-- enctype='application/x-www-form-urlencoded' --}}>
+							
+								<input type="hidden" name="_method" value="PUT">
+
+								<div class="top-margin">
+									<label>Username</label>
+									<input type="text" name="username" class="form-control" value="{{ user.username }}">
+								</div>
+								<div class="top-margin">
+									<label>Email Address : </label>
+									<span>{{ user.email }}</span>
+									
+								</div>
+
+								<div class="top-margin">
+									<label>Status</label>
+									<input type="checkbox" name="status" {{#if user.status }} checked {{ else }} undefined {{/if}}>
+								</div>
+
+								<div class="top-margin">
+									<label>User Type :</label>
+									{{#if user.admin }} <span class="badge success">Admin</span> {{ else }} <span class="badge danger">Client</span> {{/if}}
+								</div>
+
+								<div class="top-margin">
+									<label>Registered On :</label>
+									<span> {{ user.created_at }}</span>
+								</div>
+					
+								{{#if user.updated_at}}			
+								<div class="top-margin">
+									<label>Last Update on :</label>
+									<span> {{ user.updated_at }}</span>
+								</div>
+								{{/if}}
+								<hr>
+								<div class="row">
+									<div class="col-lg-4">
+										<button class="btn btn-action" type="submit">Update</button>
+									</div>
+									<div class="col-lg-4">
+										
+										<a href="/admin/users/{{user._id}}" class="btn btn-danger">Back</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+				
+			</article>
+			<!-- /Article -->
+
+		</div>
+	</div>	<!-- /container -->
+
+{{#contentFor 'pageScripts'}}
+<script>				
+	(function() {
+		
+		var updateUser = function(data){
+			console.log(data);
+		}
+
+		var deleteUser = function(data){
+			console.log(data);
+		}
+
+		var submitAjaxRequest = function(e){
+
+			var form = $(this);
+			var method = form.find('input[name="_method"]').val() || 'POST';
+			
+			$.ajax({
+				type: method, 
+				url: form.prop('action'),
+				data: form.serialize(),
+				success: function( data ) {
+					var funcname = data.callback;
+					
+					if(funcname == 'updateUser') {
+						updateUser(data);
+					}
+
+					if(funcname == 'deleteUser') {
+						deleteUser(data);
+					}
+				
+		        },
+		        error: function( data ) {
+		        	console.log(data);
+		        }
+			});
+
+			e.preventDefault();
+		};
+
+		$('form[data-remote]').on('submit', submitAjaxRequest);
+
+	})();
+</script>
+{{/contentFor}}
+
+	

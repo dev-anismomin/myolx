@@ -1,0 +1,74 @@
+{{!< main }}
+
+	<header id="head" class="secondary"></header>
+
+	<!-- container -->
+	<div class="container">
+
+		<div class="row">
+			
+			<!-- Article main content -->
+			<article class="col-xs-12 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Users</h1>
+				</header>
+				
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="thin text-center">Registered Users</h3>
+							<hr>
+							{{#each users}}
+							<div class="top-margin" id="user_{{ this._id }}">
+								<label>{{ this.username }} </label>
+								<span>
+									<a href="/admin/users/{{ this._id }}">  - {{ this.email }}</a>
+								</span>
+
+								<a href="/admin/users/{{ this._id }}" data-method="delete">delete</a>
+							</div>
+							{{/each}}
+						</div>
+					</div>
+
+				</div>
+				
+			</article>
+			<!-- /Article -->
+
+		</div>
+	</div>	<!-- /container -->
+	
+{{#contentFor 'pageScripts'}}
+<script>
+		
+	$("a[data-method='delete']").click(function(e){
+		
+		e.preventDefault();
+	    $.ajax({
+	        url: this.getAttribute('href'),
+	        type: 'DELETE',
+	        success: function( data ) {
+				var funcname = data.callback;
+				
+				if(funcname == 'deleteUser') {
+					deleteUser(data);
+				}
+	        },
+	        error: function( data ) {
+	        	console.log(data);
+	        }
+	    });
+	    
+	});
+
+	var deleteUser = function (data) {
+	    $('#user_' + data.data._id).remove();
+	};
+
+	var deleteUser = function (data) {
+	    $('#user_' + data.data._id).remove();
+	};	
+
+</script>
+{{/contentFor}}

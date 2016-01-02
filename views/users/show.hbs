@@ -1,0 +1,66 @@
+{{!< main }}
+
+	<header id="head" class="secondary"></header>
+
+	<!-- container -->
+	<div class="container">
+		<div class="row">
+			
+			<!-- Article main content -->
+			<article class="col-xs-12 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">{{ user.username }}'s Profile</h1>
+				</header>
+				
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="thin text-center">Bio Data</h3>
+							<hr>
+							<div class="top-margin">
+								<label>Username : </label>
+								<span>{{ user.username }}</span>
+							</div>
+							<div class="top-margin">
+								<label>Email Address : </label>
+								<span>{{ user.email }}</span>
+							</div>
+							<div class="top-margin">
+								<label>Status : </label>
+								{{#if user.status }} <span class="badge">Active</span> {{ else }} <span class="badge">Unactive</span> {{/if}}
+							</div>
+							<div class="top-margin">
+								<label>User Type : </label>
+								{{#if user.admin }} <span class="badge success">Admin</span> {{ else }} <span class="badge danger">Client</span> {{/if}}
+							</div>
+
+							<div class="top-margin">
+								<label>Registered On : </label>
+								<span> {{ user.created_at }}</span>
+							</div>
+							{{#if user.updated_at}}			
+							<div class="top-margin">
+								<label>Last Update on :</label>
+								<span> {{ user.updated_at }}</span>
+							</div>
+							{{/if}}
+							<hr>
+							<div class="row">
+								<div class="col-lg-6 text-center">
+									<a href="/admin/users/{{ user._id }}/edit" class="btn btn-success" >Edit</a>
+								</div>
+								<div class="col-lg-6 text-center">
+									<a href="/admin/users" class="btn btn-action">Back</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				
+			</article>
+			<!-- /Article -->
+
+		</div>
+	</div>	<!-- /container -->
+	

@@ -1,0 +1,74 @@
+{{!< main }}
+
+	<header id="head" class="secondary"></header>
+
+	<!-- container -->
+	<div class="container">
+		<div class="row">
+			
+			<!-- Article main content -->
+			<article class="col-xs-12 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">{{ posting.title }}</h1>
+				</header>
+				
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="thin text-center">Ad Detail</h3>
+							<hr>
+							<div class="top-margin">
+								<label>Price : </label>
+								<span>{{ posting.price }}</span>
+							</div>
+							<div class="top-margin">
+								<label>Description : </label>
+								<span>{{ posting.description }}</span>
+							</div>
+							<div class="top-margin">
+								<label>Images : </label>
+								{{#each posting.images }}
+									<span><img src="/{{ this.path }}" /></span>
+								{{/each}}
+								
+							</div>
+							<div class="top-margin">
+								<label>Name : </label>
+								<span>{{ posting.name }}</span>
+							</div>
+							<div class="top-margin">
+								<label>Contact : </label>
+								<span>{{ posting.phone }}</span>
+							</div>
+
+							<div class="top-margin">
+								<label>State : </label>
+								<span>{{ posting.state }}</span>
+							</div>
+							<div class="top-margin">
+								<label>City : </label>
+								<span>{{ posting.city }}</span>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-lg-6 text-center">
+									<a href="/posting/{{ posting._id }}/edit" class="btn btn-action" >Edit</a>
+								</div>
+								<div class="col-lg-6 text-center">
+									<form action="/posting/{{ posting._id }}" mothod="post">
+										<input type="hidden" name="_method" value="DELETE">
+										<button class="btn btn-danger" type="submit">Delete</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				
+			</article>
+			<!-- /Article -->
+
+		</div>
+	</div>	<!-- /container -->
+	
