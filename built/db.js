@@ -1,0 +1,12 @@
+/// <reference path='../typings/tsd.d.ts' />
+var mongoose = require('mongoose');
+//mongoose.connect('mongodb://localhost:27017/olx');
+mongoose.connect('mongodb://rambo:rambo123@ds037185.mongolab.com:37185/olx');
+// https://itsmyolx.herokuapp.com/
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+    console.log('database connect Successfully');
+});
+exports.__esModule = true;
+exports["default"] = mongoose;
