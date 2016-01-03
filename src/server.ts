@@ -25,7 +25,7 @@ import flash = require('connect-flash');
 
 var hbsHelpers = require('./helpers/hbs-helpers');
 
-
+app.set('port', (process.env.PORT || 3000));
 
 // =======================
 // Routers ============
@@ -102,8 +102,10 @@ app.use('/admin', onlyAdmin, adminRoute);
 // =======================
 // Server Start ============
 // =======================
-var port: number = process.env.PORT | 3000;
-var server = app.listen(port, () => {
+// var port: number = process.env.PORT | 3000;
+
+
+var server = app.listen(app.get('port'), () => {
 	var listeningPort: number = server.address().port;
 	console.log('The server is listening on port: ' + listeningPort);
 });

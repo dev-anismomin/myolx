@@ -15,6 +15,7 @@ var hash = require('bcryptjs');
 var hbs = require('express-hbs');
 var flash = require('connect-flash');
 var hbsHelpers = require('./helpers/hbs-helpers');
+app.set('port', (process.env.PORT || 3000));
 // =======================
 // Routers ============
 // =======================
@@ -81,8 +82,8 @@ app.use('/admin', onlyAdmin, adminRoute);
 // =======================
 // Server Start ============
 // =======================
-var port = process.env.PORT | 3000;
-var server = app.listen(port, function () {
+// var port: number = process.env.PORT | 3000;
+var server = app.listen(app.get('port'), function () {
     var listeningPort = server.address().port;
     console.log('The server is listening on port: ' + listeningPort);
 });
