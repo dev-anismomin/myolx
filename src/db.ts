@@ -5,7 +5,7 @@ import mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost:27017/olx');
 mongoose.connect('mongodb://rambo:rambo123@ds037185.mongolab.com:37185/olx');
 
-// https://serene-hollows-9541.herokuapp.com/
+// https://itsmyolx.herokuapp.com/
 
 var db = mongoose.connection;
 
